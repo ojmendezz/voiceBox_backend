@@ -1,8 +1,6 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Category {
 
-enum Category {
-    LOW, MEDIUM, HIGH
+
 }

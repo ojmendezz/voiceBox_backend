@@ -1,5 +1,5 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-public class Book {
+public class Comment {
 
 }

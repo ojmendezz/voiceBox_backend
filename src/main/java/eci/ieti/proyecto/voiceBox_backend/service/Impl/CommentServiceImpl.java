@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ArrayList<Comment> getCommentsFromAudioBook(Long audioBookID) {
-        ArrayList comments = new ArrayList<Comment>();
+        ArrayList<Comment> comments = new ArrayList<Comment>();
         return comments;
     }
 

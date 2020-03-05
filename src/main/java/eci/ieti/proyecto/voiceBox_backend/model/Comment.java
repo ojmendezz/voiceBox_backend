@@ -1,5 +1,6 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
+<<<<<<< HEAD
 import java.util.Date;
 
 import java.text.SimpleDateFormat;
@@ -40,3 +41,8 @@ public class Comment{
     }
     
 }
+=======
+public class Comment {
+
+}
+>>>>>>> origin/master

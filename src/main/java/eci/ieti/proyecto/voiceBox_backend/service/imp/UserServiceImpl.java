@@ -14,48 +14,33 @@ import eci.ieti.proyecto.voiceBox_backend.service.UserService;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    private Persistence persistence = new Persistence();
+    private String persistence;
 
     @Override
     public List<User> getAll() {
-        return persistence.getAllUsers();
+        return null;
     }
 
     @Override
-    public User getById(String userId) {
-        return persistence.getUserById(userId);
+    public  User getById(String userId){
+    	 return null;
     }
 
     @Override
     public User create(User user) {
-        User newUer = persistence.addUser(user);
-        return newUer;
+        
+        return null;
     }
 
     @Override
     public User update(User user) {
-        User newUer = persistence.updateUser(user);
-        return newUer;
+       
+        return null;
     }
 
     @Override
     public void remove(String userId) {
-        persistence.deleteUser(userId);
+        
 
     }
-
-    @Override
-    public User getById(String userId) {
-        return null;
-    }
-
-    @Override
-    public User create(User user) {
-        return null;
-    }
-
-    @Override
-	public User update(User user) {
-		return null;
-	}
 }

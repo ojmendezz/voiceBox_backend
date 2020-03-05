@@ -15,20 +15,22 @@ import eci.ieti.proyecto.voiceBox_backend.service.UserService;
  */
 @Service
 public class LikeServiceImpl implements LikeService {
-    private Persistence persistence = new Persistence();
 
     @Override
     public long getByAudioId() {
         return 0;
     }
 
-    @Override
-    public void addLikeToAudio(long audioBookId) {
-    }
 
     @Override
     public void deleteLikeOfAudio(long audioLike, long userId) {
 
     }
+
+	@Override
+	public void addLikeToAudio(long audioBookId, long userId) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

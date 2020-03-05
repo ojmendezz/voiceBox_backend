@@ -1,5 +1,9 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
+<<<<<<< HEAD
+public class User {
+
+=======
 import java.util.ArrayList;
 
 
@@ -98,4 +102,5 @@ public class User{
     public void addCateogory(Category category) {
         this.categories.add(category);
     }*/
+>>>>>>> origin/master
 }

@@ -21,5 +21,14 @@ public class LikeServiceImpl implements LikeService {
     public long getByAudioId() {
         return 0;
     }
+
+    @Override
+    public void addLikeToAudio(long audioBookId) {
+    }
+
+    @Override
+    public void deleteLikeOfAudio(long audioLike, long userId) {
+
+    }
     
 }

@@ -1,6 +1,5 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-<<<<<<< HEAD
 import java.util.Date;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +15,7 @@ public class Comment{
     private final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
 
-    public Comment(String description, int audioBook, int user,int id) {
+    public Comment(String description, long audioBook, long user,long id) {
 
         this.id = (long) id;
         this.description = description;
@@ -41,8 +40,3 @@ public class Comment{
     }
     
 }
-=======
-public class Comment {
-
-}
->>>>>>> origin/master

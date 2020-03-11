@@ -14,7 +14,7 @@ public class CommentPersistanceImpl implements CommentPersistance {
 
     @Override
     public Boolean deleteComment(Long ID) {
-        // TODO Auto-generated method stub
+        
         return true;
     }
 
@@ -26,13 +26,13 @@ public class CommentPersistanceImpl implements CommentPersistance {
 
     @Override
     public Boolean persistComment(Comment comment) {
-        // TODO Auto-generated method stub
+        
         return true;
     }
 
     @Override
     public Boolean deleteCommentsFromAudioBook(Long audioBookID) {
-        // TODO Auto-generated method stub
+        
         return true;
     }
 

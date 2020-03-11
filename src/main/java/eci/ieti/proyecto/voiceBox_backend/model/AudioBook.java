@@ -1,11 +1,5 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-<<<<<<< HEAD
-public class AudioBook {
-    public AudioBook(){
-
-    }
-=======
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -82,5 +76,4 @@ public class AudioBook {
 		audios.put(audioId,audio);
 	}
 
->>>>>>> origin/master
 }

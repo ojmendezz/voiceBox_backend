@@ -7,14 +7,16 @@ import eci.ieti.proyecto.voiceBox_backend.model.Comment;
 
 public class CommentPersistanceImpl implements CommentPersistance {
 
+
+
     @Override
     public Long getLastId() {
-        return (long) Math.random();
+        return (long) 1;
     }
 
     @Override
     public Boolean deleteComment(Long ID) {
-        
+        //deleted
         return true;
     }
 

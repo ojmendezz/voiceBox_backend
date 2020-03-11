@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.service.Impl;
+package eci.ieti.proyecto.voiceBox_backend.service.imp;
 
 import java.util.ArrayList;
 

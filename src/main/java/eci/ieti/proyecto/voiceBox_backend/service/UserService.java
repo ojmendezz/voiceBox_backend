@@ -5,6 +5,7 @@ import java.util.List;
 import eci.ieti.proyecto.voiceBox_backend.model.User;
 
 public interface UserService {
+	
     List<User> getAll();
     
     User getById(String userId);

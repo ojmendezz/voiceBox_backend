@@ -15,7 +15,7 @@ public interface AudioBookService {
     
     AudioBook updateAudioBook(AudioBook audioBook);
     
-    void removeAudioBook(long audioBookId, long  userID, long bookId);
+    void removeAudioBook(long audioBookId, long  userID);
     
     Audio createAudio(Audio audio, long audioBook);
     

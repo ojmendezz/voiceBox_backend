@@ -3,6 +3,7 @@ package eci.ieti.proyecto.voiceBox_backend.Persistance;
 import java.util.ArrayList;
 
 import eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl.CommentPersistanceImpl;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl.SuscriptionPersistanceImpl;
 import eci.ieti.proyecto.voiceBox_backend.model.Comment;
 
 public class VoiceBoxPersistance{
@@ -10,10 +11,12 @@ public class VoiceBoxPersistance{
 
     // deberia inyectarse
     private CommentPersistance commentPersistance;
+    private SuscriptionPersistance suscriptionPersistance;
 
     public VoiceBoxPersistance(){
         // debe inyectarse
         commentPersistance = new CommentPersistanceImpl();
+        suscriptionPersistance = new SuscriptionPersistanceImpl();
 
     }
 
@@ -42,5 +45,7 @@ public class VoiceBoxPersistance{
     public Comment getComment(Long id){
         return commentPersistance.getComment(id);
     }
+
+    // suscription
     
 }

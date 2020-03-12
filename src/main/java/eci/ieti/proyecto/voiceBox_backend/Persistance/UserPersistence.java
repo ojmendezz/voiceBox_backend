@@ -6,13 +6,13 @@ import eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl.Persistenc
 import eci.ieti.proyecto.voiceBox_backend.model.User;
 
 public interface UserPersistence {
-    private List<User> getAllUsers();
+    public List<User> getAllUsers();
 
-    private User getById(long userId) throws PersistenceException;
+    public User getById(long userId) throws PersistenceException;
 
-    private User create(User user) throws PersistenceException;
+    public User create(User user) throws PersistenceException;
 
-    private User update(User user) throws PersistenceException;
+    public User update(User user) throws PersistenceException;
 
-    private void remove(String userId) throws PersistenceException;
+    public void remove(String userId) throws PersistenceException;
 }

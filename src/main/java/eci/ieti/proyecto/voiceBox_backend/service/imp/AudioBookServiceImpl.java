@@ -33,7 +33,7 @@ public class AudioBookServiceImpl implements AudioBookService{
 	}
 
 	@Override
-	public void removeAudioBook(long audioBookId, long userID, long bookId) {
+	public void removeAudioBook(long audioBookId, long userID) {
 		// TODO Auto-generated method stub
 		
 	}

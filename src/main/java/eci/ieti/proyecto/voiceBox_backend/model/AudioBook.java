@@ -8,19 +8,26 @@ public class AudioBook {
 	private long audioBookId;
 	private String date;
 	private User user;
-	private Book book;
 	private String name;
 	private ArrayList<Comment> commentaries;
 	private ArrayList<Like> likes;
 	private HashMap<Long, String> audios;
+	private long channelID; 
 	
-	public AudioBook(String date, User user, Book book, String name) {
+	public AudioBook(String date, User user, String name, long channelID) {
+		super();
 		this.date = date;
 		this.user = user;
-		this.book = book;
 		this.name = name;
+		this.channelID = channelID;
 	}
 	
+	public long getChannelID() {
+		return channelID;
+	}
+	public void setChannelID(long channelID) {
+		this.channelID = channelID;
+	}
 	public long getAudioBookId() {
 		return audioBookId;
 	}
@@ -38,12 +45,6 @@ public class AudioBook {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Book getBook() {
-		return book;
-	}
-	public void setBook(Book book) {
-		this.book = book;
 	}
 	public String getName() {
 		return name;

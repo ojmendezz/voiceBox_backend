@@ -12,14 +12,17 @@ public class AudioBook {
 	private ArrayList<Comment> commentaries;
 	private ArrayList<Like> likes;
 	private HashMap<Long, String> audios;
-	private long channelID; 
-	
+	private long channelID;
+
 	public AudioBook(String date, User user, String name, long channelID) {
 		super();
 		this.date = date;
 		this.user = user;
 		this.name = name;
 		this.channelID = channelID;
+		this.commentaries = new ArrayList<>();
+		this.likes = new ArrayList<>();
+		this.audios = new HashMap<>();
 	}
 	
 	public long getChannelID() {

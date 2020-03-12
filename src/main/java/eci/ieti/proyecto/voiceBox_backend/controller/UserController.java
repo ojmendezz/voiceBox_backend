@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
-    public ResponseEntity<User> manejadorGetRecursoUserPorId(@PathVariable String userId) {
+    public ResponseEntity<User> manejadorGetRecursoUserPorId(@PathVariable long userId) {
         User user = userServices.getById(userId);
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }

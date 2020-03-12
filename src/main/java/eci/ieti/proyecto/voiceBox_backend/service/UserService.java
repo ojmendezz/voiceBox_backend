@@ -8,7 +8,7 @@ public interface UserService {
 	
     List<User> getAll();
     
-    User getById(String userId);
+    User getById(long userId);
     
     User create(User user);
     

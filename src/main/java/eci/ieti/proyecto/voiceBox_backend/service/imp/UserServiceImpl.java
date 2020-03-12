@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public  User getById(String userId){
+    public  User getById(long userId){
     	 return null;
     }
 

@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl;
+package eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistanceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.UserPersistence;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistenceException;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.UserPersistence;
 import eci.ieti.proyecto.voiceBox_backend.model.User;
 
-@Service
+
 public class UserPersistenceImpl implements UserPersistence {
     private final HashMap<String, User> users = new HashMap<>(); 
 

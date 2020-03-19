@@ -2,10 +2,13 @@ package eci.ieti.proyecto.voiceBox_backend.service.imp;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import eci.ieti.proyecto.voiceBox_backend.model.Audio;
 import eci.ieti.proyecto.voiceBox_backend.model.AudioBook;
 import eci.ieti.proyecto.voiceBox_backend.service.AudioBookService;
 
+@Service
 public class AudioBookServiceImpl implements AudioBookService{
 
 	@Override

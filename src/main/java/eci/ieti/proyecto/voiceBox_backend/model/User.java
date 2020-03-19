@@ -1,7 +1,6 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-import java.util.ArrayList;
-
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
@@ -13,6 +12,7 @@ public class User{
     private String name;
     private String gener;
     private String birthDate;
+    @Indexed(unique = true)
     private String email;
     private String password;    
     private String createDate;    

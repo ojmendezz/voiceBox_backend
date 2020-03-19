@@ -1,8 +1,8 @@
-package eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl;
+package eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistanceImpl;
 
 import java.util.ArrayList;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.CommentPersistance;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.CommentPersistance;
 import eci.ieti.proyecto.voiceBox_backend.model.Comment;
 
 public class CommentPersistanceImpl implements CommentPersistance {

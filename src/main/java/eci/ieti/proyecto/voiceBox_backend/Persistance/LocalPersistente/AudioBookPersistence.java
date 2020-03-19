@@ -1,8 +1,7 @@
-package eci.ieti.proyecto.voiceBox_backend.Persistance;
+package eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente;
 
 import java.util.List;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl.PersistenceException;
 import eci.ieti.proyecto.voiceBox_backend.model.Audio;
 import eci.ieti.proyecto.voiceBox_backend.model.AudioBook;
 

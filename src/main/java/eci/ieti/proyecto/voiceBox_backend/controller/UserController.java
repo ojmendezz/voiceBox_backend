@@ -1,14 +1,15 @@
 package eci.ieti.proyecto.voiceBox_backend.controller;
-import org.springframework.stereotype.Service;
+
+import org.springframework.stereotype.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
 
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistenceException;
 import eci.ieti.proyecto.voiceBox_backend.model.User;
-import eci.ieti.proyecto.voiceBox_backend.service.UserService;
+import eci.ieti.proyecto.voiceBox_backend.service.imp.UserService;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Amalia Alfonso
  */
 
-@RestController // 1
+@Controller
 @RequestMapping(value = "/users") // 2
 public class UserController {
 
@@ -32,26 +33,40 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
-    public ResponseEntity<User> manejadorGetRecursoUserPorId(@PathVariable long userId) {
-        User user = userServices.getById(userId);
+    @RequestMapping(method = RequestMethod.GET, value = "/{userName}")
+    public ResponseEntity<User> manejadorGetRecursoUserPorId(@PathVariable String userName)
+            throws PersistenceException {
+        User user;
+        try {
+            user = userServices.getByUsername(userName);           
+        } catch (PersistenceException e) {
+            throw new PersistenceException(e.getMessage());
+        }
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) {
-        User user = userServices.create(newUser);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) throws PersistenceException {
+        try {
+           userServices.create(newUser);
+        } catch (PersistenceException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<User> manejadorPUTRecursoUser(@RequestBody User updateUser) {
-        User user = userServices.update(updateUser);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    public ResponseEntity<User> manejadorPUTRecursoUser(@RequestBody User updateUser) throws PersistenceException {
+        try {
+            userServices.update(updateUser);
+        } catch (PersistenceException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
-    public ResponseEntity<?> manejadorDeleteRecursoTarea(@PathVariable String userId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{userName}")
+    public ResponseEntity<?> manejadorDeleteRecursoTarea(@PathVariable String userId) throws PersistenceException {
         userServices.remove(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     } 

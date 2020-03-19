@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 
 
 public class Comment{
-
-    
     private Long id;
     private String description;
     private Long audioBook;

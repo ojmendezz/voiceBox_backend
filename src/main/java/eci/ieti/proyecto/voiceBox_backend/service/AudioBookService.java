@@ -21,6 +21,7 @@ public interface AudioBookService {
     
     void addAudio(long audioBookId, Audio audio);
     
+    void addLike(String userName);
     
-    
+    void deleteLike(String userName);
 }

@@ -3,10 +3,13 @@ package eci.ieti.proyecto.voiceBox_backend.service.imp;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import eci.ieti.proyecto.voiceBox_backend.model.AudioBook;
 import eci.ieti.proyecto.voiceBox_backend.model.Channel;
 import eci.ieti.proyecto.voiceBox_backend.service.ChannelService;
 
+@Service
 public class ChannelServiceImpl implements ChannelService {
 	private final HashMap<String, AudioBook> audioBooks = new HashMap<>();
 

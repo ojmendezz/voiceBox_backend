@@ -1,20 +1,13 @@
 package eci.ieti.proyecto.voiceBox_backend.service.imp;
 
 import java.util.ArrayList;
-
-import eci.ieti.proyecto.voiceBox_backend.Persistance.VoiceBoxPersistance;
 import eci.ieti.proyecto.voiceBox_backend.model.Comment;
 import eci.ieti.proyecto.voiceBox_backend.service.CommentService;
 
 public class CommentServiceImpl implements CommentService {
-
-    VoiceBoxPersistance vbp = new VoiceBoxPersistance();
-
     @Override
     public Boolean createComment(String description, Long user, Long audioBook) {
-
-        Comment com = new Comment(description, audioBook, user, vbp.getLastCommentId()+1);
-        vbp.saveComment(com);
+        //Comment com = new Comment(description, audioBook, user, vbp.getLastCommentId()+1);
         return true;
     }
 

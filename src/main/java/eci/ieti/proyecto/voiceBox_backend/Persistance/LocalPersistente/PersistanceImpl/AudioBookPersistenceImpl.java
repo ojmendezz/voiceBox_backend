@@ -1,11 +1,12 @@
-package eci.ieti.proyecto.voiceBox_backend.Persistance.PersistanceImpl;
+package eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistanceImpl;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.AudioBookPersistence;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.AudioBookPersistence;
+import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistenceException;
 import eci.ieti.proyecto.voiceBox_backend.model.Audio;
 import eci.ieti.proyecto.voiceBox_backend.model.AudioBook;
 

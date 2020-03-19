@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://admin:vawaadmin@voicebox-phrma.mongodb.net/test?retryWrites=true&w=majority
+      uri: mongodb://admin:vawaadmin@voicebox-shard-00-00-phrma.mongodb.net:27017,voicebox-shard-00-01-phrma.mongodb.net:27017,voicebox-shard-00-02-phrma.mongodb.net:27017/test?ssl=true&replicaSet=VoiceBox-shard-0&authSource=admin&retryWrites=true&w=majority

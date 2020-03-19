@@ -50,4 +50,16 @@ public class AudioBookServiceImpl implements AudioBookService{
 		return null;
 	}
 
+	@Override
+	public void addLike(String userName) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteLike(String userName) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

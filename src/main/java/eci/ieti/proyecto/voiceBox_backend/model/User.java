@@ -2,10 +2,14 @@ package eci.ieti.proyecto.voiceBox_backend.model;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
+@Document
 public class User{
-    private long userID;
+    @Id
     private String username;
+    private long userID;    
     private String name;
     private String gener;
     private String birthDate;
@@ -89,6 +93,13 @@ public class User{
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Customer[username=%s, name='%s', gener='%s', birthDate='%s', email='%s', password='%s', createDate='%s']",
+            username, name, gener, birthDate, email, password,  createDate);
     }
     /*
     public List<Category> getCateogries() {

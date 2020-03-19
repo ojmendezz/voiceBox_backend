@@ -1,7 +1,7 @@
 package eci.ieti.proyecto.voiceBox_backend.model;
 
-public class Audio {
-
+public class Audio {	
+	private long id;
 	private String name;
 	private String audio;
 	private String duration;
@@ -10,7 +10,8 @@ public class Audio {
 	private long audioId;
 	private long numReproductions;
 	
-	public Audio(String name, String audio, String duration, String description, long audiobook) {
+	public Audio(long id, String name, String audio, String duration, String description, long audiobook) {
+		this.id = id;
 		this.name = name;
 		this.audio = audio;
 		this.duration = duration;

@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:vawaadmin@voicebox-phrma.mongodb.net/test?retryWrites=true&w=majority

@@ -3,14 +3,13 @@ package eci.ieti.proyecto.voiceBox_backend.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AudioBook {
-	
+public class AudioBook {	
 	private long audioBookId;
 	private String date;
 	private User user;
 	private String name;
 	private ArrayList<Comment> commentaries;
-	private ArrayList<Like> likes;
+	private ArrayList<String> likes;
 	private HashMap<Long, String> audios;
 	private long channelID;
 
@@ -61,10 +60,15 @@ public class AudioBook {
 	public void setCommentaries(ArrayList<Comment> commentaries) {
 		this.commentaries = commentaries;
 	}
-	public ArrayList<Like> getLikes() {
+	public ArrayList<String> getLikes() {
 		return likes;
 	}
-	public void setLikes(ArrayList<Like> likes) {
+
+	public void addLike(String userName) {
+		likes.add(userName);
+	}
+
+	public void setLikes(ArrayList<String> likes) {
 		this.likes = likes;
 	}
 

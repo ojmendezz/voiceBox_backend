@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente;
+package ieti.voicebox.persistence;
 
 /**
  *

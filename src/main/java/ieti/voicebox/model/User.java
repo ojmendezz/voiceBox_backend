@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.model;
+package ieti.voicebox.model;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,8 +18,7 @@ public class User{
     private String createDate;    
     //private List<Category> categories;
 
-    public User(long userID, String username, String name, String gener, String birthDate, String email,
-            String password, String createDate) {
+    public User(long userID, String username, String name, String gener, String birthDate, String email, String password, String createDate) {
         this.userID = userID;
         this.username = username;
         this.name = name;
@@ -105,7 +104,6 @@ public class User{
     public List<Category> getCateogries() {
         return cateogries;
     }
-
     public void addCateogory(Category category) {
         this.categories.add(category);
     }*/

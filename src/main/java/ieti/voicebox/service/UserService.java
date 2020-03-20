@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.service.imp;
+package ieti.voicebox.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistenceException;
-import eci.ieti.proyecto.voiceBox_backend.Persistance.PersistenceMongoDB.UserRepository;
-import eci.ieti.proyecto.voiceBox_backend.model.User;
+import ieti.voicebox.model.User;
+import ieti.voicebox.persistence.PersistenceException;
+import ieti.voicebox.persistence.UserRepository;
 
 /**
  * @author Amalia Alfonso
@@ -28,14 +28,9 @@ public class UserService{
     	return user;
     }
 
-    public void create(User user) throws PersistenceException {
-        Optional<User> userS = userRepository.findById(user.getUsername());
-        if(userS == null){
-            userRepository.save(user);
-        }else{
-            throw new PersistenceException("The user "+ user.getUsername() +" already exit");
-        }
-        
+    public void create(User user) throws PersistenceException {        
+        User userToSave = user;
+        userRepository.save(userToSave);
     }
 
     public void update(User user) throws PersistenceException {

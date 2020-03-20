@@ -1,4 +1,4 @@
-package eci.ieti.proyecto.voiceBox_backend.controller;
+package ieti.voicebox.controller;
 
 import org.springframework.stereotype.Controller;
 import java.util.List;
@@ -7,18 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import eci.ieti.proyecto.voiceBox_backend.Persistance.LocalPersistente.PersistenceException;
-import eci.ieti.proyecto.voiceBox_backend.model.User;
-import eci.ieti.proyecto.voiceBox_backend.service.imp.UserService;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * @author Amalia Alfonso
- */
+import ieti.voicebox.model.User;
+import ieti.voicebox.persistence.PersistenceException;
+import ieti.voicebox.service.UserService;
 
 @Controller
 @RequestMapping(value = "/users") // 2
@@ -47,11 +43,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) throws PersistenceException {
-        try {
-           userServices.create(newUser);
-        } catch (PersistenceException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        userServices.create(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

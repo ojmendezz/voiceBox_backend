@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ieti.voicebox.model.Audio;
 import ieti.voicebox.model.AudioBook;
+import ieti.voicebox.service.AudioBookService;
 
 @Controller
 @RequestMapping("books/audioBooks")

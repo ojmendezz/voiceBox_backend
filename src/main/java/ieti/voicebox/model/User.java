@@ -15,7 +15,8 @@ public class User{
     @Indexed(unique = true)
     private String email;
     private String password;    
-    private String createDate;    
+    private String createDate;
+    private Channel channel;   
     //private List<Category> categories;
 
     public User(long userID, String username, String name, String gener, String birthDate, String email, String password, String createDate) {
@@ -94,6 +95,10 @@ public class User{
         this.createDate = createDate;
     }
 
+    public void createChannel(Channel channel){
+        this.channel = channel;
+    }
+
     @Override
     public String toString() {
         return String.format(
@@ -107,4 +112,8 @@ public class User{
     public void addCateogory(Category category) {
         this.categories.add(category);
     }*/
+
+    public Channel getChannel() {
+        return channel;
+    }
 }

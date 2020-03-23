@@ -17,8 +17,9 @@ public class AudioBook {
 	private ArrayList<String> likesUsersId;
 	private HashMap<Long, String> audios;
 	private long channelID;
+	private long price;
 
-	public AudioBook(String date, User user, String name, long channelID) {
+	public AudioBook(String date, User user, String name, long channelID, long price) {
 		super();
 		this.date = date;
 		this.user = user;
@@ -27,6 +28,7 @@ public class AudioBook {
 		this.commentaries = new ArrayList<>();
 		this.likesUsersId = new ArrayList<>();
 		this.audios = new HashMap<>();
+		this.price=price;
 	}
 	
 	public long getChannelID() {
@@ -83,5 +85,8 @@ public class AudioBook {
 	public void addAudio(long audioId, String audio) {
 		audios.put(audioId,audio);
 	}
+
+	public long getPrice(){ return this.price;}
+	public void setPrice(long p){ this.price=p;}
 
 }

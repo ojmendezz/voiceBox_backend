@@ -13,7 +13,7 @@ public class AudioBook {
 	private String date;
 	private User user;
 	private String name;
-	private ArrayList<Commentary> commentaries;
+	private ArrayList<Comment> commentaries;
 	private ArrayList<String> likesUsersId;
 	private HashMap<Long, String> audios;
 	private long channelID;
@@ -61,10 +61,10 @@ public class AudioBook {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<Commentary> getCommentaries() {
+	public ArrayList<Comment> getCommentaries() {
 		return commentaries;
 	}
-	public void setCommentaries(ArrayList<Commentary> commentaries) {
+	public void setCommentaries(ArrayList<Comment> commentaries) {
 		this.commentaries = commentaries;
 	}
 	public ArrayList<String> getLikes() {

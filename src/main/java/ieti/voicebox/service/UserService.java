@@ -18,6 +18,8 @@ public class UserService{
     @Autowired
     private UserRepository userRepository;
 
+
+
     
     public List<User> getAll() {
         return userRepository.findAll();
@@ -50,4 +52,8 @@ public class UserService{
             userRepository.deleteById(userName);
         }
     }
+
+
+
+    
 }

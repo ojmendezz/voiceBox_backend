@@ -40,7 +40,7 @@ public class ChannelService {
 	}
 
 	public void addAudioBook(AudioBook audiobook) throws PersistenceException {
-		Channel channel = channelRepository.findById(audiobook.getUserChannel()).orElseThrow(() -> new PersistenceException("No se encontró el canal"));
+		Channel channel = channelRepository.findById(audiobook.getChannelName()).orElseThrow(() -> new PersistenceException("No se encontró el canal"));
 		if(channel.getAudioBooks().containsKey(audiobook.getName())){
 			throw new PersistenceException("There is already an audiobook with the name "+ audiobook.getName());			
 		}else{

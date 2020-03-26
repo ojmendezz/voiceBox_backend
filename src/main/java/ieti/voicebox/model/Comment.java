@@ -17,6 +17,8 @@ public class Comment{
     private final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
 
+    public Comment(){}
+
     public Comment(String description, String audioBook, long userName,long id) {
 
         this.id = (long) id;

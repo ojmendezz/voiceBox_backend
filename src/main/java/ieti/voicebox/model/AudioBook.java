@@ -1,6 +1,8 @@
 package ieti.voicebox.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.data.annotation.Id;
@@ -9,34 +11,44 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class AudioBook {
 	@Id
-	private String audioBookId;
-	private String date;
-	private String userChannel;
-	private String name;
-	private String idImg;
+	private String audioBookId; // id que toca encontrar
+
+	private final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // fecha de creacion
+	private String name; // * nombre del audiolibro 
 	private ArrayList<Comment> commentaries;
 	private ArrayList<String> likesUsersId;
-	private HashMap<Long, String> audios;
-	private long channelID;
-	private long price;
+	private HashMap<Long, String> audios; 
+	private String channelName; // *
+	private long price; // *
+	private String tags;
+	private String idImg;
 
-	public AudioBook(String date, String userChannel, String name, long price, String idImg) {
-		this.date = date;
-		this.userChannel = userChannel;
+
+
+	public AudioBook(){
+		
+	}
+
+	public AudioBook(String channelId, String name,long price,String idImg,String tags) {
+		System.out.println("<z<zx<zx<zx<xz");
 		this.name = name;
-		this.idImg = idImg;
+		this.channelName = channelId;
 		this.commentaries = new ArrayList<>();
 		this.likesUsersId = new ArrayList<>();
 		this.audios = new HashMap<>();
 		this.price = price;
+		this.idImg =idImg;
+		this.tags=tags;
+	}
+		
+
+
+	public String getChannelName() {
+		return channelName;
 	}
 
-	public long getChannelID() {
-		return channelID;
-	}
-
-	public void setChannelID(final long channelID) {
-		this.channelID = channelID;
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	public String getAudioBookId() {
@@ -50,11 +62,6 @@ public class AudioBook {
 	public String getDate() {
 		return date;
 	}
-
-	public void setDate(final String date) {
-		this.date = date;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -99,12 +106,28 @@ public class AudioBook {
 		this.price = p;
 	}
 
-	public String getUserChannel() {
-		return userChannel;
+	public ArrayList<String> getLikesUsersId() {
+		return likesUsersId;
 	}
 
-	public void setUserChannel(String userChannel) {
-		this.userChannel = userChannel;
+	public void setLikesUsersId(ArrayList<String> likesUsersId) {
+		this.likesUsersId = likesUsersId;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public String getIdImg() {
+		return idImg;
+	}
+
+	public void setIdImg(String idImg) {
+		this.idImg = idImg;
 	}
 
 }

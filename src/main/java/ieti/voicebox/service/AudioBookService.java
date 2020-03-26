@@ -1,34 +1,59 @@
 package ieti.voicebox.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 import ieti.voicebox.model.*;
+import ieti.voicebox.persistence.AudioBookRepository;
+import ieti.voicebox.persistence.PersistenceException;
+import ieti.voicebox.persistence.UserRepository;
 
-
+@Configuration
 public class AudioBookService{
-
-	public List<Audio> getAudios(long audioBookId) {
-		// TODO Auto-generated method stub
+	
+	@Autowired
+    private AudioBookRepository audioBookRepository;
+	
+	public List<AudioBook> getAllAudioBooks() {
+        return audioBookRepository.findAll();
+    }
+	
+	/*public List<Audio> getAudios(String audioBookId) {
+		Optional<AudioBook> audios = audioBookRepository.findById(audioBookId);
+		
 		return null;
+	}*/
+
+	public AudioBook getById(String audioBookId) throws PersistenceException {
+		AudioBook audioBook = audioBookRepository.findById(audioBookId).orElseThrow(() -> new PersistenceException("The audiobook was not found"));
+	    return audioBook;
 	}
 
-	public AudioBook getById(long audioBookId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void createAudioBook(AudioBook audiobook) {
+		AudioBook audioBookToSave = audiobook;
+		audioBookRepository.save(audioBookToSave);
 	}
 
-	public AudioBook createAudioBook(AudioBook audiobook) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateAudioBook(AudioBook audioBook) throws PersistenceException {
+		Optional<AudioBook> audiobook = audioBookRepository.findById(audioBook.getAudioBookId());
+        if(audiobook == null){
+            throw new PersistenceException("The audiobook "+ audioBook.getAudioBookId() +" doesn't exit");
+        }else{
+        	audioBookRepository.save(audioBook);
+        }
 	}
 
-	public AudioBook updateAudioBook(AudioBook audioBook) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removeAudioBook(long audioBookId, long userID) {
-		// TODO Auto-generated method stub
+	/*falta al usuario eliminar el audiolibro*/
+	public void removeAudioBook(String audioBookId, long userID) throws PersistenceException {
+		Optional<AudioBook> audiobook = audioBookRepository.findById(audioBookId);
+        if(audiobook == null){
+            throw new PersistenceException("The audioBook "+ audioBookId +" doesn't exit");
+        }else{
+        	audioBookRepository.deleteById(audioBookId);
+        }
 		
 	}
 

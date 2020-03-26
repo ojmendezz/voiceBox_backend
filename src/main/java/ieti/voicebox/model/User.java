@@ -19,6 +19,7 @@ public class User{
     private Channel channel;   
     //private List<Category> categories;
 
+    
     public User(long userID, String username, String name, String gener, String birthDate, String email, String password, String createDate) {
         this.userID = userID;
         this.username = username;
@@ -29,9 +30,14 @@ public class User{
         this.password = password;
         this.createDate = createDate;
         //this.categories = new ArrayList<>();
+        System.out.println("creo user-------------------");
     }
 
-    public long getUserID() {
+    public User() {
+    	System.out.println("creo user-------------------");
+	}
+
+	public long getUserID() {
         return userID;
     }
 
@@ -94,15 +100,15 @@ public class User{
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
-
+/*
     public void createChannel(Channel channel){
         this.channel = channel;
     }
-
+*/
     @Override
     public String toString() {
         return String.format(
-            "Customer[username=%s, name='%s', gener='%s', birthDate='%s', email='%s', password='%s', createDate='%s']",
+            "User[username=%s, name='%s', gener='%s', birthDate='%s', email='%s', password='%s', createDate='%s']",
             username, name, gener, birthDate, email, password,  createDate);
     }
     /*
@@ -112,8 +118,8 @@ public class User{
     public void addCateogory(Category category) {
         this.categories.add(category);
     }*/
-
+/*
     public Channel getChannel() {
         return channel;
-    }
+    }*/
 }

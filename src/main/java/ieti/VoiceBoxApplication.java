@@ -10,6 +10,7 @@ import ieti.voicebox.service.UserService;
 
 @SpringBootApplication
 public class VoiceBoxApplication  {
+	
 	@Autowired
 	UserService userService;
 

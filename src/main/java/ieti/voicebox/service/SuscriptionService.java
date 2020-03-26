@@ -4,11 +4,12 @@ package ieti.voicebox.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 import ieti.voicebox.model.Suscription;
 import ieti.voicebox.persistence.SuscriptionRepository;
 
-
+@Configuration
 public class SuscriptionService {
 
     @Autowired

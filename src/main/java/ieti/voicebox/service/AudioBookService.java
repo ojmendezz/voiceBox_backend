@@ -9,13 +9,15 @@ import org.springframework.context.annotation.Configuration;
 import ieti.voicebox.model.*;
 import ieti.voicebox.persistence.AudioBookRepository;
 import ieti.voicebox.persistence.PersistenceException;
-import ieti.voicebox.persistence.UserRepository;
 
 @Configuration
 public class AudioBookService{
 	
 	@Autowired
-    private AudioBookRepository audioBookRepository;
+	private AudioBookRepository audioBookRepository;
+	
+	@Autowired 
+	private ChannelService channelService;
 	
 	public List<AudioBook> getAllAudioBooks() {
         return audioBookRepository.findAll();
@@ -32,8 +34,10 @@ public class AudioBookService{
 	    return audioBook;
 	}
 
-	public void createAudioBook(AudioBook audiobook) {
-		AudioBook audioBookToSave = audiobook;
+	public void createAudioBook(AudioBook audioBookToSave) throws PersistenceException {		
+		long id = audioBookRepository.count()+1;
+		audioBookToSave.setAudioBookId(String.valueOf(id));
+		channelService.addAudioBook(audioBookToSave);
 		audioBookRepository.save(audioBookToSave);
 	}
 
@@ -47,15 +51,17 @@ public class AudioBookService{
 	}
 
 	/*falta al usuario eliminar el audiolibro*/
-	public void removeAudioBook(String audioBookId, long userID) throws PersistenceException {
-		Optional<AudioBook> audiobook = audioBookRepository.findById(audioBookId);
-        if(audiobook == null){
-            throw new PersistenceException("The audioBook "+ audioBookId +" doesn't exit");
-        }else{
-        	audioBookRepository.deleteById(audioBookId);
-        }
-		
+	public void removeAudioBook(String userChannel, String audioBookName) throws PersistenceException {
+		channelService.removeAudioBook(userChannel, audioBookName);
 	}
+
+	public void removeAudioBook1(String audioBookId) throws PersistenceException {
+		audioBookRepository.deleteById(audioBookId);
+	}
+
+	public long countAudiobooks() throws PersistenceException {
+        return audioBookRepository.count();
+    } 
 
 	public void addAudio(long audioBookId, Audio audio) {
 		// TODO Auto-generated method stub

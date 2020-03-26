@@ -12,7 +12,6 @@ public class User{
     private String name;
     private String gener;
     private String birthDate;
-    @Indexed(unique = true)
     private String email;
     private String password;    
     private String createDate;
@@ -20,8 +19,7 @@ public class User{
     //private List<Category> categories;
 
     
-    public User(long userID, String username, String name, String gener, String birthDate, String email, String password, String createDate) {
-        this.userID = userID;
+    public User(String username, String name, String gener, String birthDate, String email, String password, String createDate) {
         this.username = username;
         this.name = name;
         this.gener = gener;
@@ -30,12 +28,7 @@ public class User{
         this.password = password;
         this.createDate = createDate;
         //this.categories = new ArrayList<>();
-        System.out.println("creo user-------------------");
     }
-
-    public User() {
-    	System.out.println("creo user-------------------");
-	}
 
 	public long getUserID() {
         return userID;
@@ -118,8 +111,12 @@ public class User{
     public void addCateogory(Category category) {
         this.categories.add(category);
     }*/
-/*
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
     public Channel getChannel() {
         return channel;
-    }*/
+    }
 }

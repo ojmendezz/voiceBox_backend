@@ -31,7 +31,6 @@ public class UserService{
     }
 
     public void create(User user) throws PersistenceException {        
-        
         System.out.println(user.toString());
         userRepository.save(user);
     }

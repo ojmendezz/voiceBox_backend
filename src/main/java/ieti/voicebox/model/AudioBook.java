@@ -19,10 +19,10 @@ public class AudioBook {
 	private ArrayList<String> likesUsersId;
 	private HashMap<Long, String> audios; 
 	private String channelName; // *
-	private String originalAuthor;
+	private String originalAuthor; //*
 	private long price; // *
-	private String tags;
-	private String idImg;
+	private String tags;//*
+	private String idImg;//*
 
 
 
@@ -30,10 +30,10 @@ public class AudioBook {
 		
 	}
 
-	public AudioBook(String channelId, String name,long price,String idImg,String tags,String og) {
+	public AudioBook(String channelName, String name,long price,String idImg,String tags,String og) {
 		System.out.println("<z<zx<zx<zx<xz");
 		this.name = name;
-		this.channelName = channelId;
+		this.channelName = channelName;
 		this.commentaries = new ArrayList<>();
 		this.likesUsersId = new ArrayList<>();
 		this.audios = new HashMap<>();

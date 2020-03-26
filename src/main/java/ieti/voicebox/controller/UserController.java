@@ -28,6 +28,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> manejadorGetRecursoUsers() {
         List<User> users = userServices.getAll();
+        System.out.println("Encontrando users_");
         return new ResponseEntity<>(users, HttpStatus.ACCEPTED);
     }
 
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{userName}/{password}")
-    public ResponseEntity<Boolean> manejadoVerificaUsuario(@PathVariable String userName,@PathVariable String password )
+    public ResponseEntity<Boolean> manejadotVerificaUsuario(@PathVariable String userName,@PathVariable String password )
             throws PersistenceException {
         User user;
         System.out.println(userName);
@@ -57,8 +58,7 @@ public class UserController {
             }
         } catch (PersistenceException e) {
         	System.out.println("The user "+userName+" does not exist");
-        	throw new PersistenceException(e.getMessage());
-            
+        	throw new PersistenceException(e.getMessage()); 
         }
         return new ResponseEntity<>(correcto, HttpStatus.ACCEPTED);
     }
@@ -66,9 +66,7 @@ public class UserController {
     
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) throws PersistenceException {
-        System.out.println("ewkfjbweifj");
-        System.out.println(newUser.toString());
-    	userServices.create(newUser);
+        userServices.create(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -83,8 +81,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{userName}")
-    public ResponseEntity<?> manejadorDeleteRecursoTarea(@PathVariable String userId) throws PersistenceException {
-        userServices.remove(userId);
+    public ResponseEntity<?> manejadorDeleteRecursoTarea(@PathVariable String userName) throws PersistenceException {
+        userServices.remove(userName);
         return new ResponseEntity<>(HttpStatus.OK);
     } 
 

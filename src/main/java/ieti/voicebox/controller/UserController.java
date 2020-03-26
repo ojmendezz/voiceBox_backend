@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +17,7 @@ import ieti.voicebox.model.User;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.service.UserService;
 
+@CrossOrigin(maxAge = 3600)
 @Controller
 @RequestMapping(value = "/users") // 2
 public class UserController {
@@ -44,7 +45,9 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) throws PersistenceException {
-        userServices.create(newUser);
+        System.out.println("ewkfjbweifj");
+        System.out.println(newUser.toString());
+    	userServices.create(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class AudioBook {
 	@Id
-	private long audioBookId;
+	private String audioBookId;
 	private String date;
-	private User user;
+	private String user;
 	private String name;
 	private ArrayList<Comment> commentaries;
 	private ArrayList<String> likesUsersId;
@@ -19,7 +19,7 @@ public class AudioBook {
 	private long channelID;
 	private long price;
 
-	public AudioBook(String date, User user, String name, long channelID, long price) {
+	public AudioBook(String date, String user, String name, long channelID, long price) {
 		super();
 		this.date = date;
 		this.user = user;
@@ -37,10 +37,10 @@ public class AudioBook {
 	public void setChannelID(long channelID) {
 		this.channelID = channelID;
 	}
-	public long getAudioBookId() {
+	public String getAudioBookId() {
 		return audioBookId;
 	}
-	public void setAudioBookId(long audioBookId) {
+	public void setAudioBookId(String audioBookId) {
 		this.audioBookId = audioBookId;
 	}
 	public String getDate() {
@@ -49,10 +49,10 @@ public class AudioBook {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 	public String getName() {

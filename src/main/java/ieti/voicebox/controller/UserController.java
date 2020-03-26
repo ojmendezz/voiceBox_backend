@@ -43,6 +43,27 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{userName}/{password}")
+    public ResponseEntity<Boolean> manejadoVerificaUsuario(@PathVariable String userName,@PathVariable String password )
+            throws PersistenceException {
+        User user;
+        System.out.println(userName);
+        System.out.println(password);
+        boolean correcto=false;
+        try {
+            user = userServices.getByUsername(userName);  
+            if (user.getPassword().equals(password)) {
+            	correcto = true;
+            }
+        } catch (PersistenceException e) {
+        	System.out.println("The user "+userName+" does not exist");
+        	throw new PersistenceException(e.getMessage());
+            
+        }
+        return new ResponseEntity<>(correcto, HttpStatus.ACCEPTED);
+    }
+    
+    
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> manejadorPostRecursoUser(@RequestBody User newUser) throws PersistenceException {
         System.out.println("ewkfjbweifj");

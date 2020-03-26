@@ -19,6 +19,7 @@ public class AudioBook {
 	private ArrayList<String> likesUsersId;
 	private HashMap<Long, String> audios; 
 	private String channelName; // *
+	private String originalAuthor;
 	private long price; // *
 	private String tags;
 	private String idImg;
@@ -29,7 +30,7 @@ public class AudioBook {
 		
 	}
 
-	public AudioBook(String channelId, String name,long price,String idImg,String tags) {
+	public AudioBook(String channelId, String name,long price,String idImg,String tags,String og) {
 		System.out.println("<z<zx<zx<zx<xz");
 		this.name = name;
 		this.channelName = channelId;
@@ -39,6 +40,7 @@ public class AudioBook {
 		this.price = price;
 		this.idImg =idImg;
 		this.tags=tags;
+		this.originalAuthor=og;
 	}
 		
 
@@ -128,6 +130,14 @@ public class AudioBook {
 
 	public void setIdImg(String idImg) {
 		this.idImg = idImg;
+	}
+
+	public String getOriginalAuthor() {
+		return originalAuthor;
+	}
+
+	public void setOriginalAuthor(String originalAuthor) {
+		this.originalAuthor = originalAuthor;
 	}
 
 }

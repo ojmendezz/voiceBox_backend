@@ -1,6 +1,8 @@
 package ieti.voicebox.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.data.annotation.Id;
@@ -9,33 +11,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class AudioBook {
 	@Id
-	private String audioBookId;
-	private String date;
-	private String user;
-	private String name;
+	private String audioBookId; // id que toca encontrar
+	private final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // fecha de creacion
+	private String name; // * nombre del audiolibro 
 	private ArrayList<Comment> commentaries;
 	private ArrayList<String> likesUsersId;
-	private HashMap<Long, String> audios;
-	private long channelID;
-	private long price;
+	private HashMap<Long, String> audios; // *
+	private long channelId; // *
+	private long price; // *
 
-	public AudioBook(String date, String user, String name, long channelID, long price) {
-		super();
-		this.date = date;
-		this.user = user;
+
+
+	public AudioBook(){
+		
+	}
+
+	public AudioBook(long channelId, String name,long price) {
+		System.out.println("<z<zx<zx<zx<xz");
 		this.name = name;
-		this.channelID = channelID;
+		this.channelId = channelId;
 		this.commentaries = new ArrayList<>();
 		this.likesUsersId = new ArrayList<>();
 		this.audios = new HashMap<>();
 		this.price=price;
 	}
 	
-	public long getChannelID() {
-		return channelID;
+	public long getChannelId() {
+		return channelId;
 	}
 	public void setChannelID(long channelID) {
-		this.channelID = channelID;
+		this.channelId = channelID;
 	}
 	public String getAudioBookId() {
 		return audioBookId;
@@ -45,15 +50,6 @@ public class AudioBook {
 	}
 	public String getDate() {
 		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getUser() {
-		return user;
-	}
-	public void setUser(String user) {
-		this.user = user;
 	}
 	public String getName() {
 		return name;

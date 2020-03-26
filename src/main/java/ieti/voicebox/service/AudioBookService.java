@@ -1,5 +1,6 @@
 package ieti.voicebox.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,14 +58,20 @@ public class AudioBookService{
 		
 	}
 
-	public void addAudio(long audioBookId, Audio audio) {
-		// TODO Auto-generated method stub
+	public void addAudio(long audioBookId, File audio) {
+		System.out.println(audio);
 		
 	}
 
 	public Audio createAudio(Audio audio, long audioBook) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<AudioBook> searchByTags(String tag) {
+		String[] tags = tag.split("&");
+		return audioBookRepository.findAnyOfTheseValues(tags);
+
 	}
 
 }

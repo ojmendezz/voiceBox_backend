@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AudioBook {
 	@Id
 	private String audioBookId; // id que toca encontrar
-
-	private final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // fecha de creacion
+	private String date; // fecha de creacion
 	private String name; // * nombre del audiolibro 
 	private ArrayList<Comment> commentaries;
 	private ArrayList<String> likesUsersId;
@@ -25,25 +24,19 @@ public class AudioBook {
 	private String idImg;//*
 
 
-
-	public AudioBook(){
-		
-	}
-
-	public AudioBook(String channelName, String name,long price,String idImg,String tags,String og) {
-		System.out.println("<z<zx<zx<zx<xz");
-		this.name = name;
+	public AudioBook(){}
+	public AudioBook(String channelName, String name, long price, String idImg, String tags, String originalAuthor) {		
 		this.channelName = channelName;
+		this.name = name;
+		this.price = price;
+		this.idImg =idImg;
 		this.commentaries = new ArrayList<>();
 		this.likesUsersId = new ArrayList<>();
 		this.audios = new HashMap<>();
-		this.price = price;
-		this.idImg =idImg;
 		this.tags=tags;
-		this.originalAuthor=og;
+		this.originalAuthor=originalAuthor;
+		this.date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 	}
-		
-
 
 	public String getChannelName() {
 		return channelName;

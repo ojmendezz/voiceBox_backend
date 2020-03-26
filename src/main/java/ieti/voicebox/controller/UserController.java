@@ -28,7 +28,6 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> manejadorGetRecursoUsers() {
         List<User> users = userServices.getAll();
-        System.out.println("Encontrando users_");
         return new ResponseEntity<>(users, HttpStatus.ACCEPTED);
     }
 

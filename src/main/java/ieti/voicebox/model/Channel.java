@@ -8,14 +8,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Channel {
 	@Id
+	private String name;
 	private long channelID;
-	private String name;	
-	private String userName;	
+	private String userName;
+	private String idImg;
 	private long followers;
 	private HashMap<String, AudioBook> audioBooks;
 	
-
-	public Channel(String name, String userName) {
+	public Channel(String name, String userName, String idImg) {
 		this.name = name;
 		this.userName = userName;
 		this.followers = 0;
@@ -49,8 +49,13 @@ public class Channel {
 		this.audioBooks.put(audioBook.getName(), audioBook);
 	}
 
-	public String getUserName(){return userName;}
-	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	
 	
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import ieti.voicebox.model.Channel;
 import ieti.voicebox.model.User;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.persistence.UserRepository;
@@ -17,9 +18,6 @@ import ieti.voicebox.persistence.UserRepository;
 public class UserService{
     @Autowired
     private UserRepository userRepository;
-
-
-
     
     public List<User> getAll() {
         return userRepository.findAll();
@@ -31,8 +29,8 @@ public class UserService{
     }
 
     public void create(User user) throws PersistenceException {        
-        
-        System.out.println(user.toString());
+        long id = userRepository.count()+1;
+		user.setUserID(id);
         userRepository.save(user);
     }
 
@@ -41,6 +39,16 @@ public class UserService{
         if(userS == null){
             throw new PersistenceException("The user "+ user.getUsername() +" doesn't exit");
         }else{
+            userRepository.save(user);
+        }
+    }
+
+    public void updateChannel(Channel channel) throws PersistenceException {
+        User user = userRepository.findById(channel.getUserName()).orElseThrow(() -> new PersistenceException("No se encontró el usuario"));
+        if(user == null){
+            throw new PersistenceException("The user "+ channel.getUserName() +" doesn't exit");
+        }else{
+            user.setChannel(channel);
             userRepository.save(user);
         }
     }
@@ -54,7 +62,13 @@ public class UserService{
         }
     }
 
-
-
-    
+    public void assignChannel(Channel channel) throws PersistenceException {        
+        User user = userRepository.findById(channel.getUserName()).orElseThrow(() -> new PersistenceException("No se encontró el usuario"));
+        if(user.getChannel() == null){
+            user.setChannel(channel);
+            userRepository.save(user);
+        }else{
+            throw new PersistenceException("The user already has a channel.");
+        }		
+    }
 }

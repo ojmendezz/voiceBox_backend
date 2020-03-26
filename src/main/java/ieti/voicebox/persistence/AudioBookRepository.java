@@ -2,6 +2,7 @@ package ieti.voicebox.persistence;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.ExecutableFindOperation.FindWithQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import ieti.voicebox.model.Audio;
 import ieti.voicebox.model.AudioBook;
@@ -30,11 +29,16 @@ public class AudioBookController {
 	@Autowired
 	private AudioBookService audioBookService;
 	
-	@PostMapping("/audiobooks")
-	public ResponseEntity<Long> createAudioBook(@RequestBody AudioBook audioBook){
+	@PostMapping
+	public ResponseEntity<?> createAudioBook(@RequestBody AudioBook audioBook){
 		System.out.println("entro ");
-		audioBookService.createAudioBook(audioBook);
-		return new ResponseEntity<>(audioBook.getChannelId(),HttpStatus.CREATED);
+		try {
+			audioBookService.createAudioBook(audioBook);
+		} catch (PersistenceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(audioBook.getChannelName(),HttpStatus.CREATED);
 	}
 
 	@PostMapping("/audiobooks/{channelId}")
@@ -83,4 +87,15 @@ public class AudioBookController {
 	
 	
 	
+	@RequestMapping(method = RequestMethod.DELETE, value = "{channel}/{audioBookName}")
+	public ResponseEntity<?> deleteAudioBook(@PathVariable String channel, @PathVariable String audioBookName) throws PersistenceException {
+		try {
+			audioBookService.removeAudioBook(channel, audioBookName);
+		} catch (PersistenceException e) {
+			throw new PersistenceException(e.getMessage());
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+
 }

@@ -1,11 +1,21 @@
 package ieti.voicebox.service;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import ieti.voicebox.aws.bucket.BucketName;
+import ieti.voicebox.aws.filestore.FileStore;
 import ieti.voicebox.model.Channel;
 import ieti.voicebox.model.User;
 import ieti.voicebox.persistence.PersistenceException;
@@ -14,10 +24,19 @@ import ieti.voicebox.persistence.UserRepository;
 /**
  * @author Amalia Alfonso
  */
-@Configuration
+@Service
 public class UserService{
+    
+    private final UserRepository userRepository;    
+    private final FileStore fileStore;
+    
     @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository,
+    				FileStore fileStore) {
+    	this.userRepository = userRepository;
+    	this.fileStore = fileStore;
+    	
+    }
     
     public List<User> getAll() {
         return userRepository.findAll();
@@ -71,4 +90,85 @@ public class UserService{
             throw new PersistenceException("The user already has a channel.");
         }		
     }
+    
+    public void uploadUserProfileImage(String username, MultipartFile file) {
+		//1. check if image is not empty
+		isFileEmpty(file);
+		
+		//2. check if file is an a image
+		isImage(file);
+		
+		//3. the user exist in our database
+		User user = getUserOrThrow(username);
+		
+		//4. Grap some metada from file any
+		Map<String, String> metadata = extractMetadata(file);
+		
+		//5. Store the image in s3 and update database with s3 image link
+		String path = String.format("%s/%s",BucketName.PROFILE_IMAGE.getBucketName(), user.getUsername());
+		String fileName = String.format("%s-%s",UUID.randomUUID(),file.getOriginalFilename());
+		
+		try {
+			fileStore.save(path, fileName, Optional.of(metadata), file.getInputStream());
+			user.setUserImageLink(fileName);
+			userRepository.save(user);
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	
+	public byte[] downloadUserProfileImage(String username) {
+		User user = getUserOrThrow(username);
+		String path = String.format("%s/%s", 
+				BucketName.PROFILE_IMAGE.getBucketName(), 
+				user.getUsername());
+		
+		
+		String key = user.getUserImageLink();
+		if( key != null ) {
+			byte[] image = fileStore.download(path, key);
+			return image;
+		}else {
+			return new byte[0];
+		}			
+		/*
+		return user.getUserImageLink()			
+				.map( key -> fileStore.download(path, key) )
+				.orElse(new byte[0]);
+				*/
+						
+	}
+	
+	private Map<String, String> extractMetadata(MultipartFile file) {
+		Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put("Content-Type", file.getContentType());
+		metadata.put("Content-Length", String.valueOf(file.getSize()));
+		return metadata;
+	}
+
+	private User getUserOrThrow(String username) {
+		return userRepository
+			.findAll()
+			.stream()
+			.filter(user -> user.getUsername().equals(username))
+			.findFirst()
+			.orElseThrow(() -> new IllegalStateException(String.format("User with username %s not found", username)));
+	}
+
+	private void isImage(MultipartFile file) {
+		if(! Arrays.asList(
+				ContentType.IMAGE_JPEG.getMimeType(), 
+				ContentType.IMAGE_PNG.getMimeType()).contains(file.getContentType()) ) {
+			throw new IllegalStateException("File must be an image");
+		}
+	}
+
+	private void isFileEmpty(MultipartFile file) {
+		if(file.isEmpty()) {
+			throw new IllegalStateException("Cannot upload empty file [ "+ file.getSize() + "]" );
+		}
+	}
+    
+    
 }

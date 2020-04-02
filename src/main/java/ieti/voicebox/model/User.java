@@ -15,7 +15,8 @@ public class User{
     private String email;
     private String password;    
     private String createDate;
-    private Channel channel;   
+    private Channel channel;
+    private String userImageLink;
     //private List<Category> categories;
 
     
@@ -119,4 +120,14 @@ public class User{
     public Channel getChannel() {
         return channel;
     }
+
+	public String getUserImageLink() {
+		return userImageLink;
+	}
+
+	public void setUserImageLink(String userImageLink) {
+		this.userImageLink = userImageLink;
+	}
+    
+    
 }

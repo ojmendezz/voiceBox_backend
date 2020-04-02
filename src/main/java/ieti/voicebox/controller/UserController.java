@@ -2,28 +2,39 @@ package ieti.voicebox.controller;
 
 import org.springframework.stereotype.Controller;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import ieti.voicebox.model.User;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.service.UserService;
 
-@CrossOrigin(maxAge = 3600)
-@Controller
+@CrossOrigin("*")
+@RestController
 @RequestMapping(value = "/users") // 2
 public class UserController {
 
+    
+    private final UserService userServices;
+    
     @Autowired
-    private UserService userServices;
+    public UserController(UserService userServices) {
+    	this.userServices = userServices;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> manejadorGetRecursoUsers() {
@@ -89,4 +100,28 @@ public class UserController {
     public ResponseEntity<Boolean> suscribeToChannel(@PathVariable("userId") String userId, @PathVariable("channelId") String channelId){
         return null;
     }
+    
+    @PostMapping(
+			path = "{username}/image/upload",
+			consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE
+			
+	)
+	public void uploadUserProfileImage(@PathVariable("username") String username,
+										@RequestParam("file") MultipartFile file ) {		
+		System.out.println(file.getContentType());
+		userServices.uploadUserProfileImage(username, file);
+		
+	}
+	
+	@GetMapping(
+			path = "{username}/image/download"
+	)
+	public byte[] downloadUserProfileImage(@PathVariable("username") String username) {
+		return userServices.downloadUserProfileImage(username);
+	}
+    
+    
+    
+    
 }

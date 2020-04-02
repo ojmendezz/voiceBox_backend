@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import ieti.voicebox.model.AudioBook;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.service.AudioBookService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(maxAge = 3600)
 @Controller
@@ -31,26 +34,30 @@ public class AudioBookController {
 	
 	@PostMapping
 	public ResponseEntity<?> createAudioBook(@RequestBody AudioBook audioBook){
-		System.out.println("entro ");
 		try {
+			
 			audioBookService.createAudioBook(audioBook);
 		} catch (PersistenceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(audioBook.getChannelName(),HttpStatus.CREATED);
 	}
 
-	@PostMapping("/audiobooks/{channelId}")
-	public ResponseEntity<?> uploadAudios(@RequestBody File audios, @PathVariable long channelId){
-		audioBookService.addAudio(channelId,audios);
+	@PostMapping(path="/audiobooks/{channelId}",
+				consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+				produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<?> uploadAudios(@RequestBody MultipartFile audios, @PathVariable("channelId") String channelId){
+		System.out.println("entro 1");
+		audioBookService.addAudio(audios,channelId);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
 	
 	@PostMapping("books/audiobook/{idAudioBook}")
-	public ResponseEntity<?> createAudio(@RequestBody Audio audio){
-		return new ResponseEntity<>(audioBookService.createAudio(audio,456), HttpStatus.OK);
+	public ResponseEntity<?> createAudio(@RequestBody MultipartFile audio){
+		return new ResponseEntity<>(audioBookService.addAudio(audio,"456"), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

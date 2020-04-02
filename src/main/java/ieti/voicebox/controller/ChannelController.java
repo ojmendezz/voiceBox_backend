@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ieti.voicebox.model.AudioBook;
 import ieti.voicebox.model.Channel;
-import ieti.voicebox.model.User;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.service.ChannelService;
-import ieti.voicebox.service.UserService;
 
 
 @CrossOrigin(maxAge = 3600)

@@ -130,8 +130,6 @@ nbdist/
 # Ignore all local history of files
 .history
 
-### aws ###
-AwsConfig.java
 
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,netbeans,visualstudiocode

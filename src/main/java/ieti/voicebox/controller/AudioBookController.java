@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,14 +21,23 @@ import ieti.voicebox.model.AudioBook;
 import ieti.voicebox.persistence.PersistenceException;
 import ieti.voicebox.service.AudioBookService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(maxAge = 3600)
-@Controller
+@CrossOrigin("*")
+@RestController
 @RequestMapping("/audioBooks")
 public class AudioBookController {
 	
+	
+	private final AudioBookService audioBookService;
+	
+	
 	@Autowired
-	private AudioBookService audioBookService;
+	public AudioBookController(AudioBookService audioBookService ) {
+		this.audioBookService = audioBookService;		
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<?> createAudioBook(@RequestBody AudioBook audioBook){
@@ -41,11 +51,16 @@ public class AudioBookController {
 		return new ResponseEntity<>(audioBook.getChannelName(),HttpStatus.CREATED);
 	}
 
-	@PostMapping("/audiobooks/{channelId}")
-	public ResponseEntity<?> uploadAudios(@RequestBody File audios, @PathVariable long channelId){
-		audioBookService.addAudio(channelId,audios);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-
+	@PostMapping(
+			path = "{name}/audio/upload",
+			consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE
+			
+	)
+	public void uploadAudios(@PathVariable("name")String name,
+							  @RequestParam("file") MultipartFile file) {
+		System.out.println(file.getContentType());
+		audioBookService.uploadAudio(name, file);
 	}
 	
 	@PostMapping("books/audiobook/{idAudioBook}")

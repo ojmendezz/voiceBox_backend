@@ -131,7 +131,7 @@ nbdist/
 .history
 
 ### aws ###
-src/main/java/ieti/voicebox/aws/config/AwsConfig.java
+AwsConfig.java
 
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,netbeans,visualstudiocode

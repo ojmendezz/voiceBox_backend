@@ -14,12 +14,21 @@ public class Channel {
 	private String idImg;
 	private long followers;
 	private HashMap<String, AudioBook> audioBooks;
+	private String audioLink;
 	
 	public Channel(String name, String userName, String idImg) {
 		this.name = name;
 		this.userName = userName;
 		this.followers = 0;
 		this.audioBooks = new HashMap<>();
+	}
+	
+	public String getAudioLink() {
+		return audioLink;
+	}
+
+	public void setAudioLink(String audioLink) {
+		this.audioLink = audioLink;
 	}
 	
 	public long getChannelID() {

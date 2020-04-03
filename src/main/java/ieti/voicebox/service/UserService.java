@@ -120,18 +120,23 @@ public class UserService{
 	
 	public byte[] downloadUserProfileImage(String username) {
 		User user = getUserOrThrow(username);
-		String path = String.format("%s/%s", 
-				BucketName.PROFILE_IMAGE.getBucketName(), 
-				user.getUsername());
-		
-		
-		String key = user.getUserImageLink();
-		if( key != null ) {
-			byte[] image = fileStore.download(path, key);
-			return image;
+		String path;
+		String key;
+		if(user.getUserImageLink() != null) {
+			path = String.format("%s/%s", 
+					BucketName.PROFILE_IMAGE.getBucketName(), 
+					user.getUsername());
+			key = user.getUserImageLink();					
 		}else {
-			return new byte[0];
-		}			
+			
+			path = String.format("%s/default-user", 
+					BucketName.PROFILE_IMAGE.getBucketName());
+			key = "default-user-image.jpeg";
+			
+		}
+		byte[] image = fileStore.download(path, key);
+		return image;
+			
 		/*
 		return user.getUserImageLink()			
 				.map( key -> fileStore.download(path, key) )

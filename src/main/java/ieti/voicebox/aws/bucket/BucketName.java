@@ -2,7 +2,8 @@ package ieti.voicebox.aws.bucket;
 
 public enum BucketName {
 	
-	PROFILE_IMAGE("voicebox-files");
+	PROFILE_IMAGE("voicebox-files"),
+	AUDIO_FILE("voicebox-audios");
 	
 	private final String bucketName;
 	

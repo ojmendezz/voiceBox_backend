@@ -1,6 +1,7 @@
 package ieti.voicebox.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 
-import ieti.voicebox.model.*;
+import ieti.voicebox.aws.bucket.BucketName;
+import ieti.voicebox.aws.filestore.FileStore;
+import ieti.voicebox.model.Audio;
+import ieti.voicebox.model.AudioBook;
 import ieti.voicebox.persistence.AudioBookRepository;
 import ieti.voicebox.persistence.PersistenceException;
 
@@ -20,6 +24,9 @@ public class AudioBookService{
 	
 	@Autowired 
 	private ChannelService channelService;
+	
+	@Autowired
+	FileStore fileStore;
 	
 	public List<AudioBook> getAllAudioBooks() {
         return audioBookRepository.findAll();
@@ -85,12 +92,18 @@ public class AudioBookService{
 
 	}
 
-	public void uploadAudio(String name, MultipartFile file) {
+	public void uploadAudio(String name, MultipartFile file) throws IOException {
 		//1. check if audio is not empty
 		isFileEmpty(file);
 		//2. check if file is an audio
 		isAudio(file);
+		//3. Upload file to AWS
+		fileStore.save(BucketName.AUDIO_FILE.getBucketName(), file.getOriginalFilename(), Optional.empty(), file.getInputStream());
 		
+	}
+	
+	public String getAudioUrl(String name) {
+		return fileStore.getPresignedUrl(BucketName.AUDIO_FILE.getBucketName(), name);
 	}
 
 	private void isAudio(MultipartFile file) {

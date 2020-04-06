@@ -1,6 +1,7 @@
 package ieti.voicebox.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +59,14 @@ public class AudioBookController {
 			
 	)
 	public void uploadAudios(@PathVariable("name")String name,
-							  @RequestParam("file") MultipartFile file) {
+							  @RequestParam("file") MultipartFile file) throws IOException {
 		System.out.println(file.getContentType());
 		audioBookService.uploadAudio(name, file);
+	}
+	
+	@GetMapping("{name}/audio")
+	public String getAudio(@PathVariable("name")String name) {
+		return audioBookService.getAudioUrl(name);
 	}
 	
 	@PostMapping("books/audiobook/{idAudioBook}")
